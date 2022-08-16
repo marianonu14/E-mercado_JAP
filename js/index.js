@@ -1,9 +1,3 @@
-import isAuth from './authConfig.js'
-
-
-const value = isAuth()
-console.log(value);
-
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
