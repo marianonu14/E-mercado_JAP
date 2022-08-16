@@ -195,6 +195,10 @@ a.custom-card:hover {
     width: 40%;
   }
   .btn-login {
-    max-width: 50%;
+    max-width: 75%;
+  }
+
+  .btn-loginAuth {
+    max-width: 30%;
   }
 }
