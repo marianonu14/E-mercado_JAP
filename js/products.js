@@ -29,6 +29,5 @@ function showProduct(products){
         </div>
     </div>`
     }
-    console.log(products);
 }
 
