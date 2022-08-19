@@ -1,6 +1,13 @@
 const productoContainer = document.getElementById('car-list-container');
 
-document.addEventListener('DOMContentLoaded',getProductData)
+document.addEventListener('DOMContentLoaded',() => {
+    var isLogin = localStorage.getItem('Auth');
+
+    if(isLogin === false || !isLogin){
+        window.location = "/" 
+    }
+    
+    getProductData()})
 
 async function getProductData(){
     try {

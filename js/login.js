@@ -7,6 +7,14 @@ const inputEmail = document.getElementById('email-input');
 const inputPassword = document.getElementById('password-input');
 const messageError = document.getElementById('message-error');
 
+document.addEventListener('DOMContentLoaded', () => {
+    var isLogin = localStorage.getItem('Auth');
+
+    if(isLogin === true){
+        window.location = "mainpage.html" 
+    } 
+})
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCRrAkZUSaN2J0B6kLVAMmH-KF4Jdd7BbU",
@@ -16,11 +24,36 @@ const firebaseConfig = {
     messagingSenderId: "898607530006",
     appId: "1:898607530006:web:e1081c8dfee00afdc7f537"
     };
-    
+
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider(app);
+
+// Auth with Google
+document.getElementById('login-auth').addEventListener('click', () => {
+    signInWithPopup(auth, provider)
+    .then((result) => {
+        // The signed-in user info.
+        const user = result.user;
+
+        if(user.emailVerified){
+            localStorage.setItem('Auth', true);
+            window.location = "mainpage.html";
+        }
+    }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+    });
+    
+    })
 
 //Form Validation
 
@@ -44,7 +77,8 @@ function formSubmit(e){
 
     if(validation){
         form.reset();
-        window.location = "mainpage.html" 
+        localStorage.setItem('Auth', true);
+        window.location = "mainpage.html"
     } return;
 }
 
@@ -58,31 +92,9 @@ function showMessage(message){
     },1500)
 }
 
-// Auth with Google
 
-document.getElementById('login-auth').addEventListener('click', () => {
-signInWithPopup(auth, provider)
-.then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    if(user.emailVerified){
-        window.location = "mainpage.html";
-    }
-}).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-});
 
-})
+
 
 
 
