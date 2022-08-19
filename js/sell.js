@@ -30,9 +30,14 @@ function updateTotalCosts(){
 document.addEventListener("DOMContentLoaded", function(e){
     var isLogin = localStorage.getItem('Auth');
 
-    if(isLogin === false || !isLogin){
-        window.location = "/" 
+    if(isLogin === 'false' || !isLogin){
+        window.location = "/login.html" 
     }
+
+    document.getElementById("logout").addEventListener("click", function() {
+        localStorage.setItem('Auth', false);
+        window.location = "login.html"
+    });
 
     document.getElementById("productCountInput").addEventListener("change", function(){
         productCount = this.value;

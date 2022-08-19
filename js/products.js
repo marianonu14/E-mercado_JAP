@@ -1,17 +1,23 @@
 const productoContainer = document.getElementById('car-list-container');
 
 document.addEventListener('DOMContentLoaded',() => {
-    var isLogin = localStorage.getItem('Auth');
+    const isLogin = localStorage.getItem('Auth');
 
-    if(isLogin === false || !isLogin){
-        window.location = "/" 
+    if(isLogin === 'false' || !isLogin){
+        window.location = "/login.html"
     }
     
     getProductData()})
 
+document.getElementById("logout").addEventListener("click", function() {
+    localStorage.setItem('Auth', false);
+    window.location = "login.html"
+});
+
 async function getProductData(){
+    const categoriesId = localStorage.getItem('catID');
     try {
-        const response = await fetch('https://japceibal.github.io/emercado-api/cats_products/101.json');
+        const response = await fetch(`https://japceibal.github.io/emercado-api/cats_products/${categoriesId}.json`);
         const result = await response.json();
         showProduct(result.products);  
     } catch (error) {

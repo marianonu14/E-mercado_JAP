@@ -10,8 +10,8 @@ const messageError = document.getElementById('message-error');
 document.addEventListener('DOMContentLoaded', () => {
     var isLogin = localStorage.getItem('Auth');
 
-    if(isLogin === true){
-        window.location = "mainpage.html" 
+    if(isLogin === 'true'){
+        window.location = "/" 
     } 
 })
 
@@ -40,7 +40,7 @@ document.getElementById('login-auth').addEventListener('click', () => {
 
         if(user.emailVerified){
             localStorage.setItem('Auth', true);
-            window.location = "mainpage.html";
+            window.location = "/";
         }
     }).catch((error) => {
         // Handle Errors here.
@@ -78,7 +78,7 @@ function formSubmit(e){
     if(validation){
         form.reset();
         localStorage.setItem('Auth', true);
-        window.location = "mainpage.html"
+        window.location = "/"
     } return;
 }
 

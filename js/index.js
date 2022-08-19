@@ -1,9 +1,15 @@
 document.addEventListener("DOMContentLoaded", function(){
-    var isLogin = localStorage.getItem('Auth');
+    let isLogin = localStorage.getItem('Auth');
 
-    if(isLogin === false || !isLogin){
-        window.location = "/" 
+    if(isLogin === 'false' || !isLogin){
+        window.location = "/login.html"
+        return;
     }
+
+    document.getElementById("logout").addEventListener("click", function() {
+        localStorage.setItem('Auth', false);
+        window.location = "login.html"
+    });
     
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
