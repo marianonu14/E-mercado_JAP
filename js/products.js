@@ -43,4 +43,3 @@ function showProduct(products){
     </div>`
     }
 }
-

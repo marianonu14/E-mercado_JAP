@@ -39,6 +39,7 @@ document.getElementById('login-auth').addEventListener('click', () => {
         const user = result.user;
 
         if(user.emailVerified){
+            localStorage.setItem('userID', user.email);
             localStorage.setItem('Auth', true);
             window.location = "/";
         }
@@ -51,6 +52,7 @@ document.getElementById('login-auth').addEventListener('click', () => {
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
+        console.log(error);
     });
     
     })
@@ -76,8 +78,9 @@ function formSubmit(e){
     const validation = validForm();
 
     if(validation){
-        form.reset();
+        localStorage.setItem('userID', inputEmail.value);
         localStorage.setItem('Auth', true);
+        form.reset();
         window.location = "/"
     } return;
 }
