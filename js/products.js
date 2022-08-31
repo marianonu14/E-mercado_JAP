@@ -117,7 +117,7 @@ document.getElementById('rangeFilterCount').addEventListener('click', () =>{
     valMax = inputMax.value || 0
 
     if(valMin === 0 && valMax === 0) return;
-    
+
     const arrayFilter = products.filter(item => item.cost > valMin && item.cost < valMax)
     showProduct(arrayFilter);
 });
@@ -129,3 +129,11 @@ document.getElementById('clearRangeFilter').addEventListener('click', () =>{
 });
 
 // Filtro en Tiempo Real
+
+document.getElementById('inputFilter').addEventListener('input', (e) => {
+    const inputValue = e.target.value.toLowerCase();
+
+    const arrayFilter = products.filter(item => item.name.toLowerCase().indexOf(inputValue) === 0)
+    
+    showProduct(arrayFilter);
+})
