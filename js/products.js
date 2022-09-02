@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded',() => {
     const isLogin = localStorage.getItem('Auth');
 
     if(isLogin === 'false' || !isLogin){
-        window.location = "/login.html"
+        window.location = "login.html"
     }
 
     categoryName.textContent= categories[localStorage.getItem("catID")]
@@ -132,7 +132,7 @@ document.getElementById('clearRangeFilter').addEventListener('click', () =>{
 
 document.getElementById('inputFilter').addEventListener('input', (e) => {
     const inputValue = e.target.value.toLowerCase();
-
+    
     const arrayFilter = products.filter(item => item.name.toLowerCase().indexOf(inputValue) === 0)
     
     showProduct(arrayFilter);
