@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded',() => {
     const isLogin = localStorage.getItem('Auth');
 
     if(isLogin === 'false' || !isLogin){
-        window.location = "/login.html"
+        window.location = "login.html"
     }
 
     categoryName.textContent= categories[localStorage.getItem("catID")]
