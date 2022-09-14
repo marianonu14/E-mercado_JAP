@@ -49,7 +49,7 @@ function showProduct(products){
     productoContainer.innerHTML = ''
 
     for(items of products){
-        productoContainer.innerHTML += `<div onclick="console.log(${items.id})" class="list-group-item list-group-item-action cursor-active">
+        productoContainer.innerHTML += `<div onclick="handleClick(${items.id})" class="list-group-item list-group-item-action cursor-active">
         <div class="row">
             <div class="col-3">
                 <img src="${items.image}" alt="${items.description}" class="img-thumbnail">
@@ -64,6 +64,11 @@ function showProduct(products){
         </div>
     </div>`
     }
+}
+
+function handleClick(params){
+    localStorage.setItem('ProductID', params);
+    window.location = "product-info.html"
 }
 
 //Filtrar por Precio y Articulos Vendidos
@@ -132,7 +137,7 @@ document.getElementById('clearRangeFilter').addEventListener('click', () =>{
 
 document.getElementById('inputFilter').addEventListener('input', (e) => {
     const inputValue = e.target.value.toLowerCase();
-
+    
     const arrayFilter = products.filter(item => item.name.toLowerCase().indexOf(inputValue) === 0)
     
     showProduct(arrayFilter);

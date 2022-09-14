@@ -189,6 +189,14 @@ a.custom-card:hover {
   color: orange;
 }
 
+.img-container{
+  max-width: 100vw;
+}
+
+.img-container img{
+  width: 20%;
+}
+
 
 @media (min-width: 768px) {
   form {
