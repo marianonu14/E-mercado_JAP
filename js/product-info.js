@@ -1,5 +1,9 @@
 const productContainer = document.getElementById('product');
 const commentsContainer = document.getElementById('comments');
+const textAreaInput = document.getElementById('opinion');
+const selectInput = document.getElementById('selectPuntación');
+const btnForm = document.getElementById('btn-enviar');
+let commentsArray = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     const productId = localStorage.getItem('ProductID');
@@ -22,7 +26,10 @@ async function getComments(params) {
     try {
         const response = await fetch(`https://japceibal.github.io/emercado-api/products_comments/${params}.json`);
         const result = await response.json();
-        showComments(result);
+
+        commentsArray=[...result]
+
+        showComments(commentsArray);
     } catch (error) {
         console.log(error);
     }
@@ -50,7 +57,7 @@ function showProduct(product){
     </div>`
 }
 
-const rate = {
+const rating = {
     1: '<span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span>',
     2: '<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span>',
     3: '<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span>',
@@ -65,10 +72,22 @@ function showComments(comments){
         commentsContainer.innerHTML += `
         <div class="p-2 border">
             <div class="d-flex align-items-center mb-2">
-                <span class="fw-bold">${user}</span> - ${dateTime} - ${rate[score]}
+                <span class="fw-bold">${user}</span> - ${dateTime} - ${rating[score]}
             </div>    
             <div>${description}</div>
         </div>`    
     });
 }
+
+btnForm.addEventListener('click', (e) =>{
+    e.preventDefault();
+    const newComment = {
+        user: "User Undefined",
+        dateTime: new Date(),
+
+    }
+    console.log(textAreaInput.value)
+    console.log(selectInput.value)
+    console.log(commentsArray);
+})
 
