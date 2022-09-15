@@ -1,5 +1,6 @@
 const productContainer = document.getElementById('product');
 const commentsContainer = document.getElementById('comments');
+const form = document.getElementById('form');
 const textAreaInput = document.getElementById('opinion');
 const selectInput = document.getElementById('selectPuntación');
 const btnForm = document.getElementById('btn-enviar');
@@ -66,6 +67,11 @@ const rating = {
 }
 
 function showComments(comments){
+
+    if(!comments.length) return commentsContainer.innerHTML = '<p class="p-3">No Hay Comentarios...</p>'
+
+    commentsContainer.innerHTML = ''
+
     comments.forEach(comment => {
         const {user, dateTime, score, description} = comment
 
@@ -81,13 +87,20 @@ function showComments(comments){
 
 btnForm.addEventListener('click', (e) =>{
     e.preventDefault();
+
     const newComment = {
-        user: "User Undefined",
-        dateTime: new Date(),
+        product: parseInt(localStorage.getItem('ProductID')),
+        score: parseInt(selectInput.value),
+        description: textAreaInput.value,
+        user: localStorage.getItem('userID'),
+        dateTime: new Date().toString(),
 
     }
-    console.log(textAreaInput.value)
-    console.log(selectInput.value)
-    console.log(commentsArray);
+
+    commentsArray = [...commentsArray, newComment]
+
+    showComments(commentsArray);
+
+    form.reset()
 })
 
