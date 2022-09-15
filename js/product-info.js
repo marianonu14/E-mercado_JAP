@@ -35,6 +35,7 @@ async function getComments(params) {
         console.log(error);
     }
 }
+
 function showProduct(product){
     const {name, cost, currency, description, category, soldCount, images} = product
 
@@ -94,7 +95,6 @@ btnForm.addEventListener('click', (e) =>{
         description: textAreaInput.value,
         user: localStorage.getItem('userID'),
         dateTime: new Date().toString(),
-
     }
 
     commentsArray = [...commentsArray, newComment]
