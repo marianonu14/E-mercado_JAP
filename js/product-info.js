@@ -89,15 +89,17 @@ function showComments(comments){
 btnForm.addEventListener('click', (e) =>{
     e.preventDefault();
 
+    const date = new Date();
+
     const newComment = {
         product: parseInt(localStorage.getItem('ProductID')),
         score: parseInt(selectInput.value),
         description: textAreaInput.value,
         user: localStorage.getItem('userID'),
-        dateTime: new Date().toString(),
+        dateTime: (`${date.toISOString().split('T')[0]} ${date.toLocaleTimeString()}`),
     }
 
-    commentsArray = [...commentsArray, newComment]
+    commentsArray = [newComment, ...commentsArray]
 
     showComments(commentsArray);
 
