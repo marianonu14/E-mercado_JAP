@@ -197,6 +197,10 @@ a.custom-card:hover {
   width: 20%;
 }
 
+.card-related {
+  cursor: pointer;
+}
+
 
 @media (min-width: 768px) {
   form {

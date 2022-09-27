@@ -1,5 +1,6 @@
 const productContainer = document.getElementById('product');
 const commentsContainer = document.getElementById('comments');
+const relatedProductsContainer = document.getElementById('relacionados-container');
 const form = document.getElementById('form');
 const textAreaInput = document.getElementById('opinion');
 const selectInput = document.getElementById('selectPuntación');
@@ -13,11 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
     getComments(productId);
 })
 
+document.getElementById("logout").addEventListener("click", function() {
+    localStorage.setItem('Auth', false);
+    window.location = "login.html"
+});
+
 async function getProductData(params) {
     try {
         const response = await fetch(`https://japceibal.github.io/emercado-api/products/${params}.json`);
         const result = await response.json();
         showProduct(result);
+        showRelatedProducts(result.relatedProducts);
     } catch (error) {
         console.log(error);
     }
@@ -38,7 +45,7 @@ async function getComments(params) {
 
 function showProduct(product){
     const {name, cost, currency, description, category, soldCount, images} = product
-
+    
     productContainer.innerHTML += `      
     <h1 class="mt-3 py-4">${name}</h1>
     <hr>
@@ -51,12 +58,28 @@ function showProduct(product){
     <h3 class="fw-bold fs-4">Cantidad de Vendidos</h3>
     <p>${soldCount}</p>
     <h3 class="fw-bold fs-4">Imagenes Ilustrativas</h3>
-    <div class="img-container d-flex justify-content-between py-3">
-        <img class="img-fluid" src="${images[0]}" alt="Img Product">
-        <img class="img-fluid" src="${images[1]}" alt="Img Product">
-        <img class="img-fluid" src="${images[2]}" alt="Img Product">
-        <img class="img-fluid" src="${images[3]}" alt="Img Product">
-    </div>`
+    <div class="img-container d-flex justify-content-between py-3" id="img-container"></div>`
+
+    const imgContainer = document.getElementById('img-container');
+
+    images.forEach(image => {
+        imgContainer.innerHTML += `
+        <img class="img-fluid" src="${image}" alt="Img Product">`
+    })
+}
+
+function showRelatedProducts(related){
+    relatedProductsContainer.innerHTML = '';
+
+    related.forEach(elem => {
+        relatedProductsContainer.innerHTML += `
+        <div class="card card-related" style="width: 18rem;" onClick="redirectPage(${elem.id})">
+            <img class="card-img-top" src="${elem.image}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-center pt-2">${elem.name}</h5>
+            </div>
+        </div>`
+    })
 }
 
 const rating = {
@@ -105,4 +128,10 @@ btnForm.addEventListener('click', (e) =>{
 
     form.reset()
 })
+
+function redirectPage(id){
+    localStorage.setItem('ProductID', id);
+
+    window.location = "product-info.html"
+}
 

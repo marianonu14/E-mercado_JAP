@@ -8,12 +8,12 @@ document.addEventListener("DOMContentLoaded", function(){
         return;
     }
     
-    userId.textContent = localStorage.getItem("userID")
+    // userId.textContent = localStorage.getItem("userID")
 
-    document.getElementById("logout").addEventListener("click", function() {
-        localStorage.setItem('Auth', false);
-        window.location = "login.html"
-    });
+    // document.getElementById("logout").addEventListener("click", function() {
+    //     localStorage.setItem('Auth', false);
+    //     window.location = "login.html"
+    // });
     
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
