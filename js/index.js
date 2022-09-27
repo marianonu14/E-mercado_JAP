@@ -1,5 +1,3 @@
-const userId = document.getElementById('userId')
-
 document.addEventListener("DOMContentLoaded", function(){
     let isLogin = localStorage.getItem('Auth');
 
@@ -7,13 +5,6 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "/login.html"
         return;
     }
-    
-    userId.textContent = localStorage.getItem("userID")
-
-    document.getElementById("logout").addEventListener("click", function() {
-        localStorage.setItem('Auth', false);
-        window.location = "login.html"
-    });
     
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);

@@ -6,6 +6,14 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/prod
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
+const userId = document.getElementById('userId')
+
+userId.textContent = localStorage.getItem("userID")
+
+document.getElementById("logout").addEventListener("click", function() {
+    localStorage.setItem('Auth', false);
+    window.location = "login.html"
+});
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
