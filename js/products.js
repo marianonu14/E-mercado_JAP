@@ -118,10 +118,10 @@ const inputMin = document.getElementById('rangeFilterCountMin');
 const inputMax = document.getElementById('rangeFilterCountMax');
 
 document.getElementById('rangeFilterCount').addEventListener('click', () =>{
-    valMin = inputMin.value || 0
-    valMax = inputMax.value || 0
+    valMin = inputMin.value
+    valMax = inputMax.value
 
-    if(valMin === 0 && valMax === 0) return;
+    if(!valMin || !valMax ) return;
 
     const arrayFilter = products.filter(item => item.cost > valMin && item.cost < valMax)
     showProduct(arrayFilter);
