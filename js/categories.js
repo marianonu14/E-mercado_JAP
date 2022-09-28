@@ -88,24 +88,13 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
-    let isLogin = localStorage.getItem('Auth');
-
-    if(isLogin === 'false' || !isLogin){
-        window.location = "/login.html" 
-    }
-    
-    
+  
     getJSONData(CATEGORIES_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
             currentCategoriesArray = resultObj.data
             showCategoriesList()
             //sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
         }
-    });
-
-    document.getElementById("logout").addEventListener("click", function() {
-        localStorage.setItem('Auth', false);
-        window.location = "login.html"
     });
 
     document.getElementById("sortAsc").addEventListener("click", function(){

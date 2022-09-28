@@ -16,20 +16,12 @@ const categories = {
 let products = [];
 
 document.addEventListener('DOMContentLoaded',() => {
-    const isLogin = localStorage.getItem('Auth');
-
-    if(isLogin === 'false' || !isLogin){
-        window.location = "login.html"
-    }
 
     categoryName.textContent= categories[localStorage.getItem("catID")]
 
-    getProductData()})
+    getProductData();
+})
 
-document.getElementById("logout").addEventListener("click", function() {
-    localStorage.setItem('Auth', false);
-    window.location = "login.html"
-});
 
 // Fetch a los Productos Según su ID
 

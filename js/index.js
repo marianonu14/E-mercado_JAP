@@ -1,11 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(){
-    let isLogin = localStorage.getItem('Auth');
 
-    if(isLogin === 'false' || !isLogin){
-        window.location = "/login.html"
-        return;
-    }
-    
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
         window.location = "products.html"

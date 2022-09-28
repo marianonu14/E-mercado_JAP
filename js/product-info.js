@@ -8,12 +8,7 @@ const btnForm = document.getElementById('btn-enviar');
 let commentsArray = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-    const isLogin = localStorage.getItem('Auth');
 
-    if(isLogin === 'false' || !isLogin){
-        window.location = "login.html"
-    }
-    
     const productId = localStorage.getItem('ProductID');
 
     getProductData(productId);
@@ -65,23 +60,20 @@ function showProduct(product){
     <p>${soldCount}</p>
     <h3 class="fw-bold fs-4">Imagenes Ilustrativas</h3>
     <!-- Carrousel -->
-    <div id="carouselExampleIndicators" class="carousel slide px-5 py-2" data-ride="carousel">
-        <ol class="carousel-indicators" id="indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        </ol>
+    <div id="carouselExampleControls" class="carousel slide pt-3 px-5" data-bs-ride="carousel">
         <div class="carousel-inner" id="img-container">
             <div class="carousel-item active">
-                <img class="d-block w-100" src="${images[0]}" alt="Img Product">
+                <img src="${images[0]}" class="d-block w-100" alt="...">
             </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>`
 
     const imgContainer = document.getElementById('img-container');
@@ -91,14 +83,6 @@ function showProduct(product){
         <div class="carousel-item">
             <img class="d-block w-100" src="${images[i]}" alt="Img Product">
         </div>
-        `
-    }
-
-    const indicatorsCarrousel = document.getElementById('indicators');
-    
-    for(let i = 1; i < images.length; i++){
-        indicatorsCarrousel.innerHTML += `
-        <li data-target="#carouselExampleIndicators" data-slide-to="${i}"></li>
         `
     }
 }

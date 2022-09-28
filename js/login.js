@@ -7,14 +7,6 @@ const inputEmail = document.getElementById('email-input');
 const inputPassword = document.getElementById('password-input');
 const messageError = document.getElementById('message-error');
 
-document.addEventListener('DOMContentLoaded', () => {
-    var isLogin = localStorage.getItem('Auth');
-
-    if(isLogin === 'true'){
-        window.location = "/" 
-    } 
-})
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyCRrAkZUSaN2J0B6kLVAMmH-KF4Jdd7BbU",
