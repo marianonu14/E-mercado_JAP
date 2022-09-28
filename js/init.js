@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   userId.textContent = localStorage.getItem("userID")
 
   document.getElementById("logout").addEventListener("click", function() {
+      localStorage.clear();
       localStorage.setItem('Auth', false);
       window.location = "login.html"
 });
