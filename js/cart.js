@@ -22,8 +22,23 @@ function showData(article){
         <td><img class="thumbnail" src="${image}" alt="Img-Product"></td>
         <td>${name}</td>
         <td>${currency} ${unitCost}</td>
-        <td><input class="input-cart " type="number" value="${value}"></td>
-        <td class="fw-bold">${currency} ${unitCost * value}</td>
+        <td>
+            <input 
+            class="input-cart"
+            value="${value}"
+            id="${id}-input" 
+            type="number" 
+            oninput="myFunction(${id},${unitCost})"
+            min="1" 
+            />
+        </td>
+        <td class="fw-bold">${currency} <span id="${id}-subtotal">${unitCost * value}</span></td>
     </tr>`
-    console.log(article)
+}
+
+function myFunction(id,unitCost) {
+    const inputCurrent = document.getElementById(`${id}-input`);
+    const subTotalCurrent = document.getElementById(`${id}-subtotal`);
+
+    subTotalCurrent.textContent = inputCurrent.value * unitCost;
 }
