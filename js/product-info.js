@@ -1,6 +1,8 @@
 const productContainer = document.getElementById('product');
 const commentsContainer = document.getElementById('comments');
-const relatedProductsContainer = document.getElementById('relacionados-container');
+const relatedProductsContainer = document.getElementById(
+  'relacionados-container'
+);
 const form = document.getElementById('form');
 const textAreaInput = document.getElementById('opinion');
 const selectInput = document.getElementById('selectPuntación');
@@ -8,48 +10,56 @@ const btnForm = document.getElementById('btn-enviar');
 let commentsArray = [];
 
 document.addEventListener('DOMContentLoaded', () => {
+  const productId = localStorage.getItem('ProductID');
 
-    const productId = localStorage.getItem('ProductID');
+  getProductData(productId);
+  getComments(productId);
+});
 
-    getProductData(productId);
-    getComments(productId);
-})
-
-document.getElementById("logout").addEventListener("click", function() {
-    localStorage.setItem('Auth', false);
-    window.location = "login.html"
+document.getElementById('logout').addEventListener('click', function () {
+  localStorage.setItem('Auth', false);
+  window.location = 'login.html';
 });
 
 async function getProductData(params) {
-    try {
-        const response = await fetch(`https://japceibal.github.io/emercado-api/products/${params}.json`);
-        const result = await response.json();
-        showProduct(result);
-        showRelatedProducts(result.relatedProducts);
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const response = await fetch(
+      `https://japceibal.github.io/emercado-api/products/${params}.json`
+    );
+    const result = await response.json();
+    showProduct(result);
+    showRelatedProducts(result.relatedProducts);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function getComments(params) {
-    try {
-        const response = await fetch(`https://japceibal.github.io/emercado-api/products_comments/${params}.json`);
-        const result = await response.json();
+  try {
+    const response = await fetch(
+      `https://japceibal.github.io/emercado-api/products_comments/${params}.json`
+    );
+    const result = await response.json();
 
-        commentsArray=[...result]
+    commentsArray = [...result];
 
-        showComments(commentsArray);
-    } catch (error) {
-        console.log(error);
-    }
+    showComments(commentsArray);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-function showProduct(product){
-    const {name, cost, currency, description, category, soldCount, images} = product
-    
-    productContainer.innerHTML += `      
-    <h1 class="mt-3 py-4">${name}</h1>
+function showProduct(product) {
+  const { id, name, cost, currency, description, category, soldCount, images } =
+    product;
+
+  productContainer.innerHTML += `      
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="mt-3 py-4">${name}</h1>
+        <button class="btn btn-success h-25 me-5" onclick="addToCart(${id})">Comprar</button>
+    </div>
     <hr>
+    <div class="text-center"><p id="message-container"></p></div>
     <h3 class="fw-bold fs-4">Precio</h3>
     <p>${currency} ${cost}</p>
     <h3 class="fw-bold fs-4">Descripción</h3>
@@ -74,83 +84,122 @@ function showProduct(product){
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
-    </div>`
+    </div>`;
 
-    const imgContainer = document.getElementById('img-container');
-    
-    for(let i = 1; i < images.length; i++){
-        imgContainer.innerHTML += `
+  const imgContainer = document.getElementById('img-container');
+
+  for (let i = 1; i < images.length; i++) {
+    imgContainer.innerHTML += `
         <div class="carousel-item">
             <img class="d-block w-100" src="${images[i]}" alt="Img Product">
         </div>
-        `
-    }
+        `;
+  }
 }
 
-function showRelatedProducts(related){
-    relatedProductsContainer.innerHTML = '';
+function addToCart(id) {
+  const cart = JSON.parse(localStorage.getItem('cart'));
 
-    related.forEach(elem => {
-        relatedProductsContainer.innerHTML += `
+  if (!cart) {
+    localStorage.setItem('cart', JSON.stringify([id]));
+    return showMessage('Producto Agregado Correctamente', 200);
+  }
+
+  const verifyExist = cart.find((elem) => elem === id);
+
+  if (verifyExist)
+    return showMessage('Este Producto ya fue agregado al carrito', 400);
+
+  const newCart = [...cart, id];
+
+  localStorage.setItem('cart', JSON.stringify(newCart));
+
+  showMessage('Producto Agregado Correctamente', 200);
+}
+
+function showMessage(message, status) {
+  const messageContainer = document.getElementById('message-container');
+
+  messageContainer.textContent = message;
+  if (status === 200)
+    messageContainer.classList =
+      'bg-success w-50 m-auto text-light rounded py-1';
+  if (status === 400)
+    messageContainer.classList =
+      'bg-danger w-50 m-auto text-light rounded py-1';
+
+  setTimeout(() => {
+    messageContainer.textContent = '';
+    messageContainer.classList = '';
+  }, 1500);
+}
+
+function showRelatedProducts(related) {
+  relatedProductsContainer.innerHTML = '';
+
+  related.forEach((elem) => {
+    relatedProductsContainer.innerHTML += `
         <div class="card card-related mr-5" style="width: 18rem;" onClick="redirectPage(${elem.id})">
             <img class="card-img-top" src="${elem.image}" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title text-center pt-2">${elem.name}</h5>
             </div>
-        </div>`
-    })
+        </div>`;
+  });
 }
 
 const rating = {
-    1: '<span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span>',
-    2: '<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span>',
-    3: '<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span>',
-    4: '<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span>',
-    5: '<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span>'
-}
+  1: '<span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span>',
+  2: '<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span>',
+  3: '<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span>',
+  4: '<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span>',
+  5: '<span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span>',
+};
 
-function showComments(comments){
+function showComments(comments) {
+  if (!comments.length)
+    return (commentsContainer.innerHTML =
+      '<p class="p-3">No Hay Comentarios...</p>');
 
-    if(!comments.length) return commentsContainer.innerHTML = '<p class="p-3">No Hay Comentarios...</p>'
+  commentsContainer.innerHTML = '';
 
-    commentsContainer.innerHTML = ''
+  comments.forEach((comment) => {
+    const { user, dateTime, score, description } = comment;
 
-    comments.forEach(comment => {
-        const {user, dateTime, score, description} = comment
-
-        commentsContainer.innerHTML += `
+    commentsContainer.innerHTML += `
         <div class="p-2 border">
             <div class="d-flex align-items-center mb-2">
                 <span class="fw-bold">${user}</span> - ${dateTime} - ${rating[score]}
             </div>    
             <div>${description}</div>
-        </div>`    
-    });
+        </div>`;
+  });
 }
 
-btnForm.addEventListener('click', (e) =>{
-    e.preventDefault();
+btnForm.addEventListener('click', (e) => {
+  e.preventDefault();
 
-    const date = new Date();
+  const date = new Date();
 
-    const newComment = {
-        product: parseInt(localStorage.getItem('ProductID')),
-        score: parseInt(selectInput.value),
-        description: textAreaInput.value,
-        user: localStorage.getItem('userID'),
-        dateTime: (`${date.toISOString().split('T')[0]} ${date.toLocaleTimeString()}`),
-    }
+  const newComment = {
+    product: parseInt(localStorage.getItem('ProductID')),
+    score: parseInt(selectInput.value),
+    description: textAreaInput.value,
+    user: localStorage.getItem('userID'),
+    dateTime: `${
+      date.toISOString().split('T')[0]
+    } ${date.toLocaleTimeString()}`,
+  };
 
-    commentsArray = [newComment, ...commentsArray]
+  commentsArray = [newComment, ...commentsArray];
 
-    showComments(commentsArray);
+  showComments(commentsArray);
 
-    form.reset()
-})
+  form.reset();
+});
 
-function redirectPage(id){
-    localStorage.setItem('ProductID', id);
+function redirectPage(id) {
+  localStorage.setItem('ProductID', id);
 
-    window.location = "product-info.html"
+  window.location = 'product-info.html';
 }
-
