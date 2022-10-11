@@ -62,7 +62,7 @@
         </table>
         <hr/>
       </div>
-      <form>
+      <form class="w-100">
         <!-- Tipo de Envio -->
         <div class="py-2">
           <h4 class="py-2">Tipo de envío</h4>
@@ -86,17 +86,19 @@
           </div>
         </div>
         <!-- Dirección de Envio -->
-        <div class="py-2">
+        <div class="w-75 py-2">
           <h4 class="py-2">Direccion de envío</h4>
-          <div class="mb-3">
-            <label for="calleInput" class="form-label">Calle</label>
-            <input type="text" class="form-control" id="calleInput">
+          <div class="d-flex gap-5">
+            <div class="mb-3 w-50">
+              <label for="calleInput" class="form-label">Calle</label>
+              <input type="text" class="form-control" id="calleInput">
+            </div>
+            <div class="mb-3 w-25">
+              <label for="numeroInput" class="form-label">Número</label>
+              <input type="number" class="form-control" id="numeroInput">
+            </div>
           </div>
-          <div class="mb-3">
-            <label for="numeroInput" class="form-label">Número</label>
-            <input type="number" class="form-control" id="numeroInput">
-          </div>
-          <div class="mb-3">
+          <div class="mb-3 w-50">
             <label for="esquinaInput" class="form-label">Esquina</label>
             <input type="text" class="form-control" id="esquinaInput">
           </div>

@@ -201,6 +201,18 @@ a.custom-card:hover {
   cursor: pointer;
 }
 
+/* Cart Page */
+
+.thumbnail {
+  width: 5rem;
+  height: auto;
+}
+
+.input-cart {
+  padding: .25rem;;
+  width: 4rem;
+  height: auto;
+}
 
 @media (min-width: 768px) {
   form {

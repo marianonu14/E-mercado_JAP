@@ -13,17 +13,17 @@ async function getData() {
 }
 
 function showData(article){
-    const { name, currency, unitCost } = article;
+    const { id, name, currency, unitCost, image } = article;
 
-    const result = 15210;
+    let value = 1;
 
     cartBody.innerHTML += `
     <tr>
-        <th scope="row">1</th>
+        <td><img class="thumbnail" src="${image}" alt="Img-Product"></td>
         <td>${name}</td>
         <td>${currency} ${unitCost}</td>
-        <td><input type="number" value="1"></td>
-        <td class="fw-bold">${currency} ${result}</td>
+        <td><input class="input-cart " type="number" value="${value}"></td>
+        <td class="fw-bold">${currency} ${unitCost * value}</td>
     </tr>`
     console.log(article)
 }
