@@ -5,6 +5,7 @@ const form = document.getElementById('form');
 const textAreaInput = document.getElementById('opinion');
 const selectInput = document.getElementById('selectPuntación');
 const btnForm = document.getElementById('btn-enviar');
+let product;
 let commentsArray = [];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,6 +26,7 @@ async function getProductData(params) {
       `https://japceibal.github.io/emercado-api/products/${params}.json`
     );
     const result = await response.json();
+    product = result;
     showProduct(result);
     showRelatedProducts(result.relatedProducts);
   } catch (error) {
@@ -48,14 +50,13 @@ async function getComments(params) {
 }
 
 function showProduct(product) {
-  const { id, name, cost, currency, description, category, soldCount, images } = product;
+  const { name, cost, currency, description, category, soldCount, images } = product;
 
-  console.log(product);
 
   productContainer.innerHTML += `      
     <div class="d-flex justify-content-between align-items-center">
         <h1 class="mt-3 py-4">${name}</h1>
-        <button class="btn btn-success h-25 me-5" onclick="addToCart(${id})">Comprar</button>
+        <button class="btn btn-success h-25 me-5" onclick="addToCart()">Comprar</button>
     </div>
     <hr>
     <div class="text-center"><p id="message-container"></p></div>
@@ -96,25 +97,35 @@ function showProduct(product) {
   }
 }
 
-function addToCart(id) {
-  console.log(id);
-  // const cart = JSON.parse(localStorage.getItem('cart'));
+function addToCart() {
+  const { id, name, cost, currency, images } = product;
+  
+  const objectCart = {
+    id: id,
+    name: name,
+    count: 1,
+    unitCost: cost,
+    currency: currency,
+    image: images[0]
+  }
 
-  // if (!cart) {
-  //   localStorage.setItem('cart', JSON.stringify([id]));
-  //   return showMessage('Producto Agregado Correctamente', 200);
-  // }
+  const cart = JSON.parse(localStorage.getItem('cart'));
 
-  // const verifyExist = cart.find((elem) => elem === id);
+  if (!cart) {
+    localStorage.setItem('cart', JSON.stringify([objectCart]));
+    return showMessage('Producto Agregado Correctamente', 200);
+  }
 
-  // if (verifyExist)
-  //   return showMessage('Este Producto ya fue agregado al carrito', 400);
+  const verifyExist = cart.find((elem) => elem.id === id);
 
-  // const newCart = [...cart, id];
+  if (verifyExist)
+    return showMessage('Este Producto ya fue agregado al carrito', 400);
 
-  // localStorage.setItem('cart', JSON.stringify(newCart));
+  const newCart = [...cart, objectCart];
 
-  // showMessage('Producto Agregado Correctamente', 200);
+  localStorage.setItem('cart', JSON.stringify(newCart));
+
+  showMessage('Producto Agregado Correctamente', 200);
 }
 
 function showMessage(message, status) {
