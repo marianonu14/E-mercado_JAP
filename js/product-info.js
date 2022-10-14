@@ -1,8 +1,6 @@
 const productContainer = document.getElementById('product');
 const commentsContainer = document.getElementById('comments');
-const relatedProductsContainer = document.getElementById(
-  'relacionados-container'
-);
+const relatedProductsContainer = document.getElementById('relacionados-container');
 const form = document.getElementById('form');
 const textAreaInput = document.getElementById('opinion');
 const selectInput = document.getElementById('selectPuntación');
@@ -50,8 +48,9 @@ async function getComments(params) {
 }
 
 function showProduct(product) {
-  const { id, name, cost, currency, description, category, soldCount, images } =
-    product;
+  const { id, name, cost, currency, description, category, soldCount, images } = product;
+
+  console.log(product);
 
   productContainer.innerHTML += `      
     <div class="d-flex justify-content-between align-items-center">
@@ -98,23 +97,24 @@ function showProduct(product) {
 }
 
 function addToCart(id) {
-  const cart = JSON.parse(localStorage.getItem('cart'));
+  console.log(id);
+  // const cart = JSON.parse(localStorage.getItem('cart'));
 
-  if (!cart) {
-    localStorage.setItem('cart', JSON.stringify([id]));
-    return showMessage('Producto Agregado Correctamente', 200);
-  }
+  // if (!cart) {
+  //   localStorage.setItem('cart', JSON.stringify([id]));
+  //   return showMessage('Producto Agregado Correctamente', 200);
+  // }
 
-  const verifyExist = cart.find((elem) => elem === id);
+  // const verifyExist = cart.find((elem) => elem === id);
 
-  if (verifyExist)
-    return showMessage('Este Producto ya fue agregado al carrito', 400);
+  // if (verifyExist)
+  //   return showMessage('Este Producto ya fue agregado al carrito', 400);
 
-  const newCart = [...cart, id];
+  // const newCart = [...cart, id];
 
-  localStorage.setItem('cart', JSON.stringify(newCart));
+  // localStorage.setItem('cart', JSON.stringify(newCart));
 
-  showMessage('Producto Agregado Correctamente', 200);
+  // showMessage('Producto Agregado Correctamente', 200);
 }
 
 function showMessage(message, status) {

@@ -2,51 +2,40 @@ const cartBody = document.getElementById('cart-body');
 let cartArray = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-  const arrayId = JSON.parse(localStorage.getItem('cart'));
-
-  if (!arrayId) return;
-
-  getData(arrayId);
+  getData();
 });
 
-async function getData(arrayId) {
+async function getData() {
   try {
-    for (let id of arrayId) {
-      const response = await fetch(
-        `https://japceibal.github.io/emercado-api/products/${id}.json`
-      );
-      const result = await response.json();
-      cartArray.push(result);
-    }
+    const response = await fetch(`https://japceibal.github.io/emercado-api/user_cart/25801.json`);
+    const result = await response.json();
+    showData(result.articles[0]);
   } catch (error) {
     console.log(error);
   }
-  showData(cartArray);
 }
 
-function showData(cartArray) {
-  for (let article of cartArray) {
-    const { id, name, currency, cost, images } = article;
+function showData(article) {
+  const { id, name, currency, unitCost, image, count } = article;
 
-    cartBody.innerHTML += `
+  cartBody.innerHTML += `
       <tr>
-          <td><img class="thumbnail" src="${images[0]}" alt="Img-Product"></td>
+          <td><img class="thumbnail" src="${image}" alt="Img-Product"></td>
           <td>${name}</td>
-          <td>${currency} ${cost}</td>
+          <td>${currency} ${unitCost}</td>
           <td>
               <input 
               class="input-cart"
-              value="1"
-              id="${id}-input" 
+              value="${count}"
+              id="${id}-input"
               type="number" 
-              oninput="setQuantity(${id},${cost})"
+              oninput="setQuantity(${id},${unitCost})"
               min="1" 
               />
           </td>
-          <td class="fw-bold">${currency} <span id="${id}-subtotal">${cost * 1}</span></td>
-          <td><button class="btn btn-danger" onClick="deleteProduct(${id})">Elimnar Producto</button></td>
+          <td class="fw-bold">${currency} <span id="${id}-subtotal">${unitCost * 1}</span></td>
+          <td><button class="btn btn-danger" onClick="deleteProduct(${id})">Eliminar Producto</button></td>
       </tr>`;
-  }
 }
 
 function setQuantity(id, unitCost) {
@@ -57,7 +46,7 @@ function setQuantity(id, unitCost) {
 }
 
 function deleteProduct(id) {
-  if (!confirm('¿Seguro Quieres Elminar Este Producto del Carrito?')) return;
+  if (!confirm('¿Seguro Quieres Eliminar Este Producto del Carrito?')) return;
 
   cartArray = cartArray.filter((item) => item.id !== id);
 
@@ -67,7 +56,7 @@ function deleteProduct(id) {
 
   cartBody.innerHTML = '';
 
-  if(!cartArray.length) return;
+  if (!cartArray.length) return;
 
   showData(cartArray);
 }
