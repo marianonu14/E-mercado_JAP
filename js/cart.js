@@ -12,18 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
 async function getData(arrayId) {
   try {
     for (let id of arrayId) {
-      const response = await fetch(`https://japceibal.github.io/emercado-api/products/${id}.json`);
+      const response = await fetch(
+        `https://japceibal.github.io/emercado-api/products/${id}.json`
+      );
       const result = await response.json();
       cartArray.push(result);
     }
   } catch (error) {
     console.log(error);
   }
-  showData(cartArray)
+  showData(cartArray);
 }
 
 function showData(cartArray) {
- for(let article of cartArray){
+  for (let article of cartArray) {
     const { id, name, currency, cost, images } = article;
 
     cartBody.innerHTML += `
@@ -42,8 +44,9 @@ function showData(cartArray) {
               />
           </td>
           <td class="fw-bold">${currency} <span id="${id}-subtotal">${cost * 1}</span></td>
+          <td><button class="btn btn-danger" onClick="deleteProduct(${id})">Elimnar Producto</button></td>
       </tr>`;
- }
+  }
 }
 
 function setQuantity(id, unitCost) {
@@ -51,4 +54,20 @@ function setQuantity(id, unitCost) {
   const subTotalCurrent = document.getElementById(`${id}-subtotal`);
 
   subTotalCurrent.textContent = inputCurrent.value * unitCost;
+}
+
+function deleteProduct(id) {
+  if (!confirm('¿Seguro Quieres Elminar Este Producto del Carrito?')) return;
+
+  cartArray = cartArray.filter((item) => item.id !== id);
+
+  const arrayStorage = JSON.parse(localStorage.getItem('cart'));
+  const filterArrayStorage = arrayStorage.filter((elem) => elem !== id);
+  localStorage.setItem('cart', JSON.stringify(filterArrayStorage));
+
+  cartBody.innerHTML = '';
+
+  if(!cartArray.length) return;
+
+  showData(cartArray);
 }
