@@ -13,7 +13,7 @@ const userId = document.getElementById('userId');
 document.addEventListener('DOMContentLoaded', () => {
   let isLogin = localStorage.getItem('Auth');
 
-  if (isLogin === 'false' || !isLogin) return (window.location = '/login.html');
+  if (isLogin === 'false' || !isLogin) return (window.location = 'login.html');
 
   userId.textContent = localStorage.getItem('userID');
 
@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('carrito').addEventListener('click', function () {
     window.location = 'cart.html';
+  });
+ 
+  document.getElementById('my-profile').addEventListener('click', function () {
+    window.location = 'my-profile.html';
   });
 });
 
