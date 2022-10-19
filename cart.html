@@ -1,132 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
 
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>eMercado - Todo lo que busques está aquí</title>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-  </head>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-      <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav w-100 justify-content-between">
-            <li class="nav-item">
-              <a class="nav-link" href="/">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="categories.html">Categorías</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="sell.html">Vender</a>
-            </li>
-            <li class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <span id="userId"></span>
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#" id="carrito">Mi Carrito</a></li>
-                <li><a class="dropdown-item" href="#" id="my-profile">Mi Perfil</a></li>
-                <li><a class="dropdown-item" href="#" id="logout">Cerrar Sesión</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <main class="container">
-      <h2 class="text-center p-4">Carrito de Compras</h2>
-      <div>
-        <h4>Articulos a Comprar</h4>
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col"></th>
-              <th scope="col">Nombre</th>
-              <th scope="col">Costo</th>
-              <th scope="col">Cantidad</th>
-              <th scope="col">Subtotal</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody id="cart-body">
-          </tbody>
-        </table>
-        <hr/>
-      </div>
-      <form class="w-100">
-        <!-- Tipo de Envio -->
-        <div class="py-2">
-          <h4 class="py-2">Tipo de envío</h4>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked>
-            <label class="form-check-label" for="flexRadioDisabled">
-              Premium 2 a 5 Días (15%)
-            </label>
-          </div>
-          <div class="form-check mt-2">
-            <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled" >
-            <label class="form-check-label" for="flexRadioCheckedDisabled">
-              Express 5 a 8 Días (7%)
-            </label>
-          </div>
-          <div class="form-check mt-2">
-            <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled" >
-            <label class="form-check-label" for="flexRadioCheckedDisabled">
-              Standard 12 a 15 Días (5%)
-            </label>
-          </div>
-        </div>
-        <!-- Dirección de Envio -->
-        <div class="w-75 py-2">
-          <h4 class="py-2">Direccion de envío</h4>
-          <div class="d-flex gap-5">
-            <div class="mb-3 w-50">
-              <label for="calleInput" class="form-label">Calle</label>
-              <input type="text" class="form-control" id="calleInput">
-            </div>
-            <div class="mb-3 w-25">
-              <label for="numeroInput" class="form-label">Número</label>
-              <input type="number" class="form-control" id="numeroInput">
-            </div>
-          </div>
-          <div class="mb-3 w-50">
-            <label for="esquinaInput" class="form-label">Esquina</label>
-            <input type="text" class="form-control" id="esquinaInput">
-          </div>
-        </div>
-        <button class="btn btn-primary" type="submit">Finalizar Compra</button>
-      </form>
-    </main>
-    <footer class="text-muted">
-      <div class="container">
-        <p class="float-end">
-          <a href="#">Volver arriba</a>
-        </p>
-        <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
-          2022</p>
-        <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
-      </div>
-    </footer>
-    <div id="spinner-wrapper">
-      <div class="lds-ring">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <span id="userId"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#" id="carrito">Mi Carrito</a></li>
+              <li><a class="dropdown-item" href="#" id="my-profile">Mi Perfil</a></li>
+              <li><a class="dropdown-item" href="#" id="logout">Cerrar Sesión</a></li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/init.js"></script>
-    <script src="js/cart.js"></script>
-  </body>
+  </nav>
+  <main class="container">
+    <h2 class="text-center p-4">Carrito de Compras</h2>
+    <div>
+      <h4>Articulos a Comprar</h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Costo</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Subtotal</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody id="cart-body">
+        </tbody>
+      </table>
+      <hr />
+    </div>
+    <form class="w-100">
+      <!-- Tipo de Envio -->
+      <div class="py-2">
+        <h4 class="py-2">Tipo de envío</h4>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked>
+          <label class="form-check-label" for="flexRadioDisabled">
+            Premium 2 a 5 Días (15%)
+          </label>
+        </div>
+        <div class="form-check mt-2">
+          <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled">
+          <label class="form-check-label" for="flexRadioCheckedDisabled">
+            Express 5 a 8 Días (7%)
+          </label>
+        </div>
+        <div class="form-check mt-2">
+          <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled">
+          <label class="form-check-label" for="flexRadioCheckedDisabled">
+            Standard 12 a 15 Días (5%)
+          </label>
+        </div>
+      </div>
+      <!-- Dirección de Envio -->
+      <div class="w-75 py-2">
+        <h4 class="py-2">Direccion de envío</h4>
+        <div class="d-flex gap-5">
+          <div class="mb-3 w-50">
+            <label for="calleInput" class="form-label">Calle</label>
+            <input type="text" class="form-control" id="calleInput">
+          </div>
+          <div class="mb-3 w-25">
+            <label for="numeroInput" class="form-label">Número</label>
+            <input type="number" class="form-control" id="numeroInput">
+          </div>
+        </div>
+        <div class="mb-3 w-50">
+          <label for="esquinaInput" class="form-label">Esquina</label>
+          <input type="text" class="form-control" id="esquinaInput">
+        </div>
+        <hr />
+      </div>
+      <!-- Dirección de Envio -->
+      <div>
+        <h4 class="py-2">Costos</h4>
+        <!-- Section Costos -->
+        <div class="d-flex justify-content-between align-items-center border p-2 m-0">
+          <div>
+            <h5>Subtotal</h5>
+            <p>Costo Unitario del Producto por Cantidad</p>
+          </div>
+          <div>
+            <p class="fs-5">USD 15200</p>
+          </div>
+        </div>
+        <!-- Section Costos -->
+        <div class="d-flex justify-content-between align-items-center border p-2 m-0">
+          <div>
+            <h5>Costo del Envío</h5>
+            <p>Según el Tipo de Envío</p>
+          </div>
+          <div>
+            <p class="fs-5">USD 240</p>
+          </div>
+        </div>
+        <!-- Section Costos -->
+        <div class="d-flex justify-content-between align-items-center border p-2 m-0">
+          <div>
+            <h5>Total ($)</h5>
+          </div>
+          <div>
+            <p class="fw-bold fs-5">USD 16000</p>
+          </div>
+        </div>
+        <hr />
+      </div>
+      <!-- Forma de Pago -->
+      <div>
+        <h4 class="py-2">Forma de Pago</h4>
+        <div class="d-flex gap-3">
+          <p>No ha Seleccionado</p>
+          <a href="#">Seleccionar</a>
+        </div>
+        <hr />
+      </div>
+      <button class="w-100 btn btn-primary" type="submit">Finalizar Compra</button>
+    </form>
+  </main>
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
+        2022</p>
+      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    </div>
+  </footer>
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+
 </html>
