@@ -116,7 +116,7 @@ function addToCart() {
     return showMessage('Producto Agregado Correctamente', 200);
   }
 
-  const verifyExist = cart.find((elem) => elem.id === id);
+  const verifyExist = cart.find(elem => elem.id === id);
 
   if (verifyExist)
     return showMessage('Este Producto ya fue agregado al carrito', 400);
@@ -148,7 +148,7 @@ function showMessage(message, status) {
 function showRelatedProducts(related) {
   relatedProductsContainer.innerHTML = '';
 
-  related.forEach((elem) => {
+  related.forEach(elem => {
     relatedProductsContainer.innerHTML += `
         <div class="card card-related mr-5" style="width: 18rem;" onClick="redirectPage(${elem.id})">
             <img class="card-img-top" src="${elem.image}" alt="Card image cap">
@@ -174,20 +174,20 @@ function showComments(comments) {
 
   commentsContainer.innerHTML = '';
 
-  comments.forEach((comment) => {
+  comments.forEach(comment => {
     const { user, dateTime, score, description } = comment;
 
     commentsContainer.innerHTML += `
-        <div class="p-2 border">
-            <div class="d-flex align-items-center mb-2">
-                <span class="fw-bold">${user}</span> - ${dateTime} - ${rating[score]}
-            </div>    
-            <div>${description}</div>
-        </div>`;
+      <div class="p-2 border">
+          <div class="d-flex align-items-center mb-2">
+              <span class="fw-bold">${user}</span> - ${dateTime} - ${rating[score]}
+          </div>    
+          <div>${description}</div>
+      </div>`;
   });
 }
 
-btnForm.addEventListener('click', (e) => {
+btnForm.addEventListener('click', e => {
   e.preventDefault();
 
   const date = new Date();

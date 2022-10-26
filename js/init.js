@@ -1,10 +1,8 @@
 const CATEGORIES_URL = 'https://japceibal.github.io/emercado-api/cats/cat.json';
-const PUBLISH_PRODUCT_URL =
-  'https://japceibal.github.io/emercado-api/sell/publish.json';
+const PUBLISH_PRODUCT_URL ='https://japceibal.github.io/emercado-api/sell/publish.json';
 const PRODUCTS_URL = 'https://japceibal.github.io/emercado-api/cats_products/';
 const PRODUCT_INFO_URL = 'https://japceibal.github.io/emercado-api/products/';
-const PRODUCT_INFO_COMMENTS_URL =
-  'https://japceibal.github.io/emercado-api/products_comments/';
+const PRODUCT_INFO_COMMENTS_URL ='https://japceibal.github.io/emercado-api/products_comments/';
 const CART_INFO_URL = 'https://japceibal.github.io/emercado-api/user_cart/';
 const CART_BUY_URL = 'https://japceibal.github.io/emercado-api/cart/buy.json';
 const EXT_TYPE = '.json';
@@ -17,17 +15,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   userId.textContent = localStorage.getItem('userID');
 
-  document.getElementById('logout').addEventListener('click', function () {
+  document.getElementById('logout').addEventListener('click', () => {
     localStorage.clear();
     localStorage.setItem('Auth', false);
     window.location = 'login.html';
   });
 
-  document.getElementById('carrito').addEventListener('click', function () {
+  document.getElementById('carrito').addEventListener('click', () => {
     window.location = 'cart.html';
   });
- 
-  document.getElementById('my-profile').addEventListener('click', function () {
+
+  document.getElementById('my-profile').addEventListener('click', () => {
     window.location = 'my-profile.html';
   });
 });
