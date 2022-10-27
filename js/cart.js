@@ -14,6 +14,7 @@ async function getData() {
       `https://japceibal.github.io/emercado-api/user_cart/25801.json`
     );
     const result = await response.json();
+    localStorage.setItem('cart', JSON.stringify(result.articles));
     showData(result.articles);
   } catch (error) {
     console.log(error);
@@ -50,6 +51,17 @@ function showData(articles) {
 function setQuantity(id, unitCost) {
   const inputCurrent = document.getElementById(`${id}-input`);
   const subTotalCurrent = document.getElementById(`${id}-subtotal`);
+
+  const arrayStorage = JSON.parse(localStorage.getItem('cart'));
+
+  const article = arrayStorage.find((elem) => elem.id === id);
+  article.count = Number(inputCurrent.value);
+
+  const newArray = arrayStorage.map((elem) =>
+    elem.id === id ? article : elem
+  );
+
+  localStorage.setItem('cart', JSON.stringify(newArray));
 
   subTotalCurrent.textContent = inputCurrent.value * unitCost;
 }
