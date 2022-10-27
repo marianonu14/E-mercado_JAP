@@ -1,4 +1,5 @@
 const cartBody = document.getElementById('cart-body');
+const forms = document.querySelectorAll('.needs-validation');
 
 document.addEventListener('DOMContentLoaded', () => {
   const arrayStorage = JSON.parse(localStorage.getItem('cart'));
@@ -84,3 +85,17 @@ function deleteProduct(id) {
 
   showData(filterArray);
 }
+
+// Validation
+
+Array.prototype.slice.call(forms)
+  .forEach(function (form) {
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
