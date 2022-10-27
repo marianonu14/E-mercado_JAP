@@ -5,11 +5,22 @@ const methodInformation = document.getElementById('methodInformation');
 const creditCardMethod = document.getElementById('creditCardMethod');
 const accountNumberMethod = document.getElementById('accountNumberMethod');
 const messageSuccess = document.getElementById('message-success');
+const subtotal = document.getElementById('subtotal');
+const shippingCost = document.getElementById('shippingCost');
+const shippingType = document.querySelectorAll('input[name="shippingType"]');
+const total = document.getElementById('total');
 
 document.addEventListener('DOMContentLoaded', () => {
   const arrayStorage = JSON.parse(localStorage.getItem('cart'));
 
-  if (arrayStorage) return showData(arrayStorage);
+  if (arrayStorage) {
+    showData(arrayStorage);
+    for (const item of arrayStorage) {
+      setQuantity(item.id, item.unitCost);
+    }
+    calcTotal();
+    return;
+  }
 
   getData();
 });
@@ -22,6 +33,7 @@ async function getData() {
     const result = await response.json();
     localStorage.setItem('cart', JSON.stringify(result.articles));
     showData(result.articles);
+    calcTotal();
   } catch (error) {
     console.log(error);
   }
@@ -70,6 +82,8 @@ function setQuantity(id, unitCost) {
   localStorage.setItem('cart', JSON.stringify(newArray));
 
   subTotalCurrent.textContent = inputCurrent.value * unitCost;
+
+  calcTotal();
 }
 
 function deleteProduct(id) {
@@ -89,17 +103,50 @@ function deleteProduct(id) {
   }
 
   showData(filterArray);
+  calcTotal();
 }
 
+function calcTotal() {
+  const subtotalArray = JSON.parse(localStorage.getItem('cart')).map((item) =>
+    item.currency === 'USD'
+      ? item.count * item.unitCost
+      : (item.count * item.unitCost) / 40
+  );
+
+  const subtotalMount = subtotalArray.reduce((prev, forw) => prev + forw, 0);
+
+  const shippingMount = calcShipping();
+
+  subtotal.textContent = subtotalMount;
+  shippingCost.textContent = parseInt(
+    subtotalMount * shippingMount - subtotalMount
+  );
+  total.textContent = parseInt(subtotalMount * shippingMount);
+}
+
+function calcShipping() {
+  const shippingType = document.querySelector(
+    'input[name="shippingType"]:checked'
+  ).value;
+  return Number(shippingType);
+}
+
+for (const item of shippingType) {
+  item.addEventListener('change', () => {
+    calcTotal();
+  });
+}
 // Validation
 Array.prototype.slice.call(forms).forEach(function (form) {
-  form.addEventListener('submit', e => {
+  form.addEventListener(
+    'submit',
+    (e) => {
       if (!form.checkValidity()) {
         e.preventDefault();
         e.stopPropagation();
       }
-      if(form.checkValidity()){
-        messageAlert()
+      if (form.checkValidity()) {
+        messageAlert();
       }
       e.preventDefault();
       form.classList.add('was-validated');
@@ -108,36 +155,40 @@ Array.prototype.slice.call(forms).forEach(function (form) {
   );
 });
 
-for(const elem of methodPayment){
+for (const elem of methodPayment) {
   elem.addEventListener('change', selectRadioInput);
 }
 
 function selectRadioInput() {
-  const methodPayment = document.querySelector('input[name="methodPayment"]:checked').value;
+  const methodPayment = document.querySelector(
+    'input[name="methodPayment"]:checked'
+  ).value;
 
-  methodInformation.textContent = methodPayment === 'BankTransfer' ? 'Transferencia Bancaria' : 'Tarjeta de Credito'
+  methodInformation.textContent =
+    methodPayment === 'BankTransfer'
+      ? 'Transferencia Bancaria'
+      : 'Tarjeta de Credito';
 
-  if(methodPayment === 'CreditCard') {
-    creditCardMethod.removeAttribute('disabled','')
-    creditCardMethod.setAttribute('required','')
+  if (methodPayment === 'CreditCard') {
+    creditCardMethod.removeAttribute('disabled', '');
+    creditCardMethod.setAttribute('required', '');
 
-    accountNumberMethod.removeAttribute('required','')
-    accountNumberMethod.setAttribute('disabled','')
+    accountNumberMethod.removeAttribute('required', '');
+    accountNumberMethod.setAttribute('disabled', '');
   }
 
-  if(methodPayment === 'BankTransfer') {
-    accountNumberMethod.removeAttribute('disabled','')
-    accountNumberMethod.setAttribute('required','')
+  if (methodPayment === 'BankTransfer') {
+    accountNumberMethod.removeAttribute('disabled', '');
+    accountNumberMethod.setAttribute('required', '');
 
-    creditCardMethod.removeAttribute('required','')
-    creditCardMethod.setAttribute('disabled','')
+    creditCardMethod.removeAttribute('required', '');
+    creditCardMethod.setAttribute('disabled', '');
   }
-
 }
 
-function messageAlert(){
-  messageSuccess.classList.remove('d-none')
+function messageAlert() {
+  messageSuccess.classList.remove('d-none');
   setTimeout(() => {
-    messageSuccess.classList.add('d-none')
-  } , 2000)
+    messageSuccess.classList.add('d-none');
+  }, 2000);
 }

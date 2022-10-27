@@ -69,19 +69,19 @@
       <div class="py-2">
         <h4 class="py-2">Tipo de envío</h4>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioDisabled" checked>
+          <input class="form-check-input" type="radio" name="shippingType" id="flexRadioDisabled" value="1.15" checked>
           <label class="form-check-label" for="flexRadioDisabled">
             Premium 2 a 5 Días (15%)
           </label>
         </div>
         <div class="form-check mt-2">
-          <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled">
+          <input class="form-check-input" type="radio" name="shippingType" id="flexRadioCheckedDisabled" value="1.07">
           <label class="form-check-label" for="flexRadioCheckedDisabled">
             Express 5 a 8 Días (7%)
           </label>
         </div>
         <div class="form-check mt-2">
-          <input class="form-check-input" type="radio" name="flexRadioDisabled" id="flexRadioCheckedDisabled">
+          <input class="form-check-input" type="radio" name="shippingType" id="flexRadioCheckedDisabled" value="1.05">
           <label class="form-check-label" for="flexRadioCheckedDisabled">
             Standard 12 a 15 Días (5%)
           </label>
@@ -125,7 +125,7 @@
             <p>Costo Unitario del Producto por Cantidad</p>
           </div>
           <div>
-            <p class="fs-5">USD 15200</p>
+            <p class="fs-5">USD <span id="subtotal"></span></p>
           </div>
         </div>
         <!-- Section Costos -->
@@ -135,7 +135,7 @@
             <p>Según el Tipo de Envío</p>
           </div>
           <div>
-            <p class="fs-5">USD 240</p>
+            <p class="fs-5">USD <span id="shippingCost"></span></p>
           </div>
         </div>
         <!-- Section Costos -->
@@ -144,7 +144,7 @@
             <h5>Total ($)</h5>
           </div>
           <div>
-            <p class="fw-bold fs-5">USD 16000</p>
+            <p class="fw-bold fs-5">USD <span id="total"></span></p>
           </div>
         </div>
         <hr />
@@ -177,14 +177,14 @@
                     <div class="d-flex align-items-center gap-3">
                       <div class="mb-3 w-50">
                         <label for="cardNumber" class="form-label">Número de Tarjeta</label>
-                        <input type="text" class="form-control" id="cardNumber" required>
+                        <input type="number" class="form-control" id="cardNumber" required>
                         <div class="invalid-feedback">
                           Ingresa una Número de Tarjeta
                         </div>
                       </div>
                       <div class="mb-3">
                         <label for="securityCode" class="form-label">Cod. de Seguridad</label>
-                        <input type="text" class="form-control" id="securityCode" required>
+                        <input type="number" class="form-control" id="securityCode" required>
                         <div class="invalid-feedback">
                           Ingresa un Cod. de Seguridad
                         </div>
@@ -192,7 +192,7 @@
                     </div>
                     <div class="mb-3 w-50">
                       <label for="expiration" class="form-label">Vencimiento(MM/AA)</label>
-                      <input type="text" class="form-control" id="expiration" required>
+                      <input type="number" class="form-control" id="expiration" required>
                       <div class="invalid-feedback">
                         Ingrese Vencimiento
                       </div>
@@ -208,7 +208,7 @@
                   <fieldset id="accountNumberMethod">
                     <div class="mb-3">
                       <label for="numberAccount" class="form-label">Número de Cuenta</label>
-                      <input type="text" class="form-control" id="numberAccount" required>
+                      <input type="number" class="form-control" id="numberAccount" required>
                       <div class="invalid-feedback">
                         Número de Cuenta
                       </div>
