@@ -153,7 +153,7 @@
       <div>
         <h4 class="py-2">Forma de Pago</h4>
         <div class="d-flex gap-3">
-          <p>No ha Seleccionado</p>
+          <p id="methodInformation">No ha Seleccionado</p>
           <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Seleccionar</a>
         </div>
         <!-- Modal -->
@@ -167,37 +167,53 @@
               <div class="modal-body">
                 <div id="form-modal">
                   <div class="form-check mt-2">
-                    <input class="form-check-input" type="radio" name="methodPayment" id="methodPayment">
+                    <input class="form-check-input" type="radio" name="methodPayment" id="CreditCard" value="CreditCard" required>
                     <label class="form-check-label" for="methodPayment">
                       Tarjeta de Credito
                     </label>
                   </div>
                   <hr>
-                  <div class="d-flex align-items-center gap-3">
+                  <fieldset id="creditCardMethod">
+                    <div class="d-flex align-items-center gap-3">
+                      <div class="mb-3 w-50">
+                        <label for="cardNumber" class="form-label">Número de Tarjeta</label>
+                        <input type="text" class="form-control" id="cardNumber" required>
+                        <div class="invalid-feedback">
+                          Ingresa una Número de Tarjeta
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label for="securityCode" class="form-label">Cod. de Seguridad</label>
+                        <input type="text" class="form-control" id="securityCode" required>
+                        <div class="invalid-feedback">
+                          Ingresa un Cod. de Seguridad
+                        </div>
+                      </div>
+                    </div>
                     <div class="mb-3 w-50">
-                      <label for="calleInput" class="form-label">Número de Tarjeta</label>
-                      <input type="text" class="form-control" id="calleInput">
+                      <label for="expiration" class="form-label">Vencimiento(MM/AA)</label>
+                      <input type="text" class="form-control" id="expiration" required>
+                      <div class="invalid-feedback">
+                        Ingrese Vencimiento
+                      </div>
                     </div>
-                    <div class="mb-3">
-                      <label for="calleInput" class="form-label">Cod. de Seguridad</label>
-                      <input type="text" class="form-control" id="calleInput">
-                    </div>
-                  </div>
-                  <div class="mb-3 w-50">
-                    <label for="calleInput" class="form-label">Vencimiento(MM/AA)</label>
-                    <input type="text" class="form-control" id="calleInput">
-                  </div>
+                  </fieldset>
                   <div class="form-check mt-2">
-                    <input class="form-check-input" type="radio" name="methodPayment" id="methodPayment">
+                    <input class="form-check-input" type="radio" name="methodPayment" id="BankTransfer" value="BankTransfer" required>
                     <label class="form-check-label" for="methodPayment">
                       Transferencia Bancaria
                     </label>
                   </div>
                   <hr>
-                  <div class="mb-3">
-                    <label for="calleInput" class="form-label">Número de Cuenta</label>
-                    <input type="text" class="form-control" id="calleInput">
-                  </div>
+                  <fieldset id="accountNumberMethod">
+                    <div class="mb-3">
+                      <label for="numberAccount" class="form-label">Número de Cuenta</label>
+                      <input type="text" class="form-control" id="numberAccount" required>
+                      <div class="invalid-feedback">
+                        Número de Cuenta
+                      </div>
+                    </div>
+                  </fieldset>
                 </div>
               </div>
               <div class="modal-footer">
@@ -209,6 +225,9 @@
         <hr />
       </div>
       <button class="w-100 btn btn-primary" type="submit">Finalizar Compra</button>
+      <div class="d-none alert alert-success" role="alert" id="message-success">
+        <h4 class="alert-heading text-center m-0">¡Tu compra se ha realizado con exito!</h4>
+      </div>
     </form>
   </main>
   <footer class="text-muted">

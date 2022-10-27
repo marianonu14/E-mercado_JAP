@@ -1,5 +1,10 @@
 const cartBody = document.getElementById('cart-body');
 const forms = document.querySelectorAll('.needs-validation');
+const methodPayment = document.querySelectorAll('input[name="methodPayment"]');
+const methodInformation = document.getElementById('methodInformation');
+const creditCardMethod = document.getElementById('creditCardMethod');
+const accountNumberMethod = document.getElementById('accountNumberMethod');
+const messageSuccess = document.getElementById('message-success');
 
 document.addEventListener('DOMContentLoaded', () => {
   const arrayStorage = JSON.parse(localStorage.getItem('cart'));
@@ -87,15 +92,52 @@ function deleteProduct(id) {
 }
 
 // Validation
-
-Array.prototype.slice.call(forms)
-  .forEach(function (form) {
-    form.addEventListener('submit', function (event) {
+Array.prototype.slice.call(forms).forEach(function (form) {
+  form.addEventListener('submit', e => {
       if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
+        e.preventDefault();
+        e.stopPropagation();
       }
+      if(form.checkValidity()){
+        messageAlert()
+      }
+      e.preventDefault();
+      form.classList.add('was-validated');
+    },
+    false
+  );
+});
 
-      form.classList.add('was-validated')
-    }, false)
-  })
+for(const elem of methodPayment){
+  elem.addEventListener('change', selectRadioInput);
+}
+
+function selectRadioInput() {
+  const methodPayment = document.querySelector('input[name="methodPayment"]:checked').value;
+
+  methodInformation.textContent = methodPayment === 'BankTransfer' ? 'Transferencia Bancaria' : 'Tarjeta de Credito'
+
+  if(methodPayment === 'CreditCard') {
+    creditCardMethod.removeAttribute('disabled','')
+    creditCardMethod.setAttribute('required','')
+
+    accountNumberMethod.removeAttribute('required','')
+    accountNumberMethod.setAttribute('disabled','')
+  }
+
+  if(methodPayment === 'BankTransfer') {
+    accountNumberMethod.removeAttribute('disabled','')
+    accountNumberMethod.setAttribute('required','')
+
+    creditCardMethod.removeAttribute('required','')
+    creditCardMethod.setAttribute('disabled','')
+  }
+
+}
+
+function messageAlert(){
+  messageSuccess.classList.remove('d-none')
+  setTimeout(() => {
+    messageSuccess.classList.add('d-none')
+  } , 2000)
+}
