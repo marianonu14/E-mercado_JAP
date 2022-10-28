@@ -136,11 +136,14 @@ for (const item of shippingType) {
     calcTotal();
   });
 }
-// Validation
+
+// Validation Start Here!
+
 Array.prototype.slice.call(forms).forEach(function (form) {
   form.addEventListener(
     'submit',
     (e) => {
+      methodPaymentValidation();
       if (!form.checkValidity()) {
         e.preventDefault();
         e.stopPropagation();
@@ -156,7 +159,25 @@ Array.prototype.slice.call(forms).forEach(function (form) {
 });
 
 for (const elem of methodPayment) {
-  elem.addEventListener('change', selectRadioInput);
+  elem.addEventListener('change', () => {
+    selectRadioInput();
+    methodPaymentValidation();
+  });
+}
+
+function methodPaymentValidation() {
+  const methodPayment = document.querySelector(
+    'input[name="methodPayment"]:checked'
+  );
+  const messageContainer = document.getElementById('method-payment-message');
+
+  messageContainer.classList.add('d-none');
+  messageContainer.classList.remove('d-block');
+
+  if (!methodPayment) {
+    messageContainer.classList.remove('d-none');
+    messageContainer.classList.add('d-block');
+  }
 }
 
 function selectRadioInput() {
