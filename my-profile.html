@@ -45,7 +45,8 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+              data-bs-toggle="dropdown" aria-expanded="false">
               <span id="userId"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -59,10 +60,53 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="container w-75">
+      <div class="d-flex justify-content-between align-items-center p-3">
+        <h1>Perfil</h1>
+        <img class="img-thumbnail thumbnail-profile" src="./img/avatar.jpg" alt="Image Profile">
       </div>
+      <hr>
+      <form class="w-100 row needs-validation" novalidate>
+        <div class="col-md-6 mb-3">
+          <label for="validationCustom01" class="form-label">Primer Nombre *</label>
+          <input type="text" class="form-control" id="validationCustom01" required>
+          <div class="invalid-feedback">
+            Debe ingresar un nombre
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationCustom02" class="form-label">Segúndo Nombre</label>
+          <input type="text" class="form-control" id="validationCustom02">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationCustom02" class="form-label">Primer Apellido *</label>
+          <input type="text" class="form-control" id="validationCustom02" required>
+          <div class="invalid-feedback">
+            Debe ingresar un apellido
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationCustom02" class="form-label">Segúndo Apellido</label>
+          <input type="text" class="form-control" id="validationCustom02">
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationCustom02" class="form-label">E-mail</label>
+          <input type="mail" class="form-control" id="validationCustom02" required>
+          <div class="invalid-feedback">
+            Debe ingresar un E-mail
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationCustom02" class="form-label">Imagen de Perfil</label>
+          <input type="file" class="form-control" aria-label="file example" >
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="validationCustom02" class="form-label">Telefono de Contacto</label>
+          <input type="number" class="form-control" id="validationCustom02">
+        </div>
+        <hr>
+        <button class="btn btn-primary col-md-3" type="submit">Guardar Cambios</button>
+      </form>
     </div>
   </main>
   <footer class="text-muted">
