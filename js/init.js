@@ -9,7 +9,7 @@ const EXT_TYPE = '.json';
 const userId = document.getElementById('userId');
 
 document.addEventListener('DOMContentLoaded', () => {
-  let isLogin = localStorage.getItem('Auth');
+  const isLogin = localStorage.getItem('Auth');
   
   if (isLogin === 'false' || !isLogin) return (window.location = 'login.html');
 
