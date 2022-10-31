@@ -63,7 +63,7 @@
     <div class="container w-75">
       <div class="d-flex justify-content-between align-items-center p-3">
         <h1>Perfil</h1>
-        <img class="img-thumbnail thumbnail-profile" src="./img/avatar.jpg" alt="Image Profile">
+        <img class="img-thumbnail thumbnail-profile" id="thumbnail-profile" src="./img/avatar.jpg" alt="Image Profile">
       </div>
       <hr>
       <form class="w-100 row needs-validation" novalidate>
@@ -91,11 +91,14 @@
         </div>
         <div class="col-md-6 mb-3">
           <label for="validationCustom02" class="form-label">E-mail</label>
-          <input type="mail" class="form-control" id="email-input">
+          <input type="mail" class="form-control" id="email-input" required>
+          <div class="invalid-feedback">
+            Debe ingresar un Email
+          </div>
         </div>
         <div class="col-md-6 mb-3">
           <label for="validationCustom02" class="form-label">Imagen de Perfil</label>
-          <input type="file" class="form-control" aria-label="file example" id="img-profile" >
+          <input type="file" class="form-control" aria-label="file example" id="img-profile">
         </div>
         <div class="col-md-6 mb-3">
           <label for="validationCustom02" class="form-label">Telefono de Contacto</label>
