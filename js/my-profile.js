@@ -25,10 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
     telephoneNumber,
   } = profileInfo;
 
-  if(imgProfile) {
-    const imageFile = (imgProfile.split("\\")[2])
+  if (imgProfile) {
+    const imageFile = imgProfile.split('\\')[2];
 
-    thumbnailProfile.src = `./img/${imageFile}`
+    thumbnailProfile.src = `./img/${imageFile}`;
   }
 
   firstNameInput.value = firstName;
@@ -57,12 +57,20 @@ Array.prototype.slice.call(forms).forEach(function (form) {
 });
 
 function saveInformation() {
+  const imgProfileStorage = JSON.parse(localStorage.getItem('profileInfo'));
+
+  const imgProfile = imageInput.value
+    ? imageInput.value
+    : imgProfileStorage
+    ? imgProfileStorage.imgProfile
+    : undefined;
+
   const profileInfo = {
     firstName: firstNameInput.value,
-    secondName: secondNameInput.value,
+    secondName: secondNameInput.value || '',
     firstLastName: firstLastNameInput.value,
-    secondLastName: secondLastNameInput.value,
-    imgProfile: imageInput.value,
+    secondLastName: secondLastNameInput.value || '',
+    imgProfile: imgProfile,
     email: emailInput.value,
     telephoneNumber: numberInput.value,
   };
