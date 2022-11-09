@@ -58,9 +58,7 @@ function showData(articles) {
                 min="1" 
                 />
             </td>
-            <td class="fw-bold">${currency} <span id="${id}-subtotal">${
-      unitCost * 1
-    }</span></td>
+            <td class="fw-bold">${currency} <span id="${id}-subtotal">${unitCost * 1}</span></td>
             <td><button class="btn btn-danger" onClick="deleteProduct(${id})">Eliminar</button></td>
         </tr>`;
   }

@@ -9,10 +9,9 @@ const emailInput = document.getElementById('email-input');
 const numberInput = document.getElementById('telephone-number');
 
 document.addEventListener('DOMContentLoaded', () => {
-  const user = localStorage.getItem('userID');
+  emailInput.value = localStorage.getItem('userID');
+  
   const profileInfo = JSON.parse(localStorage.getItem('profileInfo'));
-
-  emailInput.value = user;
 
   if (!profileInfo) return;
 
